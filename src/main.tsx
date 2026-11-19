@@ -5,5 +5,5 @@ import '@fontsource/cormorant-garamond/latin-400-italic.css';
 import '@fontsource/dm-sans/latin-400.css';
 import '@fontsource/dm-sans/latin-500.css';
 import { App } from './App';
-import './styles.css';
+import './art-direction.css';
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);

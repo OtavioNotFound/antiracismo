@@ -21,7 +21,7 @@ O build estático é gerado em `dist/`. Qualquer hospedagem de arquivos estátic
 - `src/Support.tsx`: sentimentos e orientações, sem envio ou persistência de dados.
 - `src/content.ts`: textos e fontes públicas.
 - `src/navigation.mjs`: limites de navegação e respostas de acolhimento.
-- `src/styles.css`: identidade, responsividade e movimento reduzido.
+- `src/art-direction.css`: identidade editorial, responsividade e movimento reduzido.
 
 O museu usa scroll horizontal nativo em telas menores e pinning GSAP em desktop. As opções de acessibilidade permitem leitura vertical e redução de movimento. A área de acolhimento usa navegação convencional. Não há analytics, cadastro, API de IA ou coleta de relatos.
 
@@ -31,7 +31,9 @@ Design: https://www.figma.com/design/zxyDcjBjpF1ftE0CwEI05B
 
 Fotografia: Fora do Eixo / Festival Latinidades 2013. Arquivo original: https://commons.wikimedia.org/wiki/File:ConceicaoEvaristo.jpg — CC BY-SA 2.0. A cópia WebP foi redimensionada; seu recorte visual é feito em CSS. Licença: https://creativecommons.org/licenses/by-sa/2.0/
 
-As fichas tipográficas dos livros são arte editorial própria, não capas oficiais. Textos de reflexão e títulos editoriais não são citações da autora. A página `#fontes` registra as fontes de pesquisa e de apoio, consultadas em 19/11/2026.
+O redesign usa Dark Plum #160F1D, Purple #81589D, Apricot #EDAF7A, Ivory #F8F0DF e Terracotta #A35F3E. As seis salas têm composições próprias, com fotografia documental, linha do tempo, tipografia em movimento, galeria de livros, colagem editorial e encerramento tipográfico. O acolhimento mantém uma interface clara e serena.
+
+Capas Pallas: Ponciá Vicêncio (catálogo LiteraRUA), Olhos d’água (Pedagógica) e Becos da memória (E-Bienal). As cópias foram redimensionadas para WebP, removendo margens externas quando necessário. Uso para identificação e comentário das obras; os direitos das capas permanecem com os respectivos titulares. A página `#fontes` registra os links e créditos. Textos de reflexão e títulos editoriais não são citações da autora.
 
 ## Validação
 
