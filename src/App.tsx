@@ -15,14 +15,21 @@ export function App() {
  const view=hash==='#acolhimento'?'support':hash==='#fontes'?'sources':'museum';
  useEffect(()=>{const update=()=>{setHash(location.hash||'#museu');setMenu(false);};addEventListener('hashchange',update);return()=>removeEventListener('hashchange',update);},[]);
  useEffect(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');const change=()=>setReduced(media.matches);media.addEventListener('change',change);return()=>media.removeEventListener('change',change);},[]);
- useEffect(()=>{if(view!=='museum'){window.scrollTo(0,0);requestAnimationFrame(()=>document.querySelector<HTMLElement>('main h1')?.focus());}},[view]);
+ useEffect(()=>{
+  if(view==='museum')return;
+  const frame=requestAnimationFrame(()=>{
+   window.scrollTo({top:0,behavior:'instant'});
+   document.querySelector<HTMLElement>('main h1')?.focus({preventScroll:true});
+  });
+  return()=>cancelAnimationFrame(frame);
+ },[view]);
  const go=(n:number)=>{const next='#sala-'+(n+1);if(location.hash===next)museum.current?.goTo(n);else location.hash=next;setMenu(false);};
  return <div className={'app '+(reduced?'reduce-motion ':'')+(view!=='museum'||activeRoom===1?'light-view':'dark-view')}>
   <a className="skip-link" href="#conteudo" onClick={e=>{e.preventDefault();document.getElementById('conteudo')?.focus();}}>Ir para o conteúdo</a>
   <header className="site-header">
    <a className="wordmark" href="#museu" onClick={()=>museum.current?.goTo(0)} aria-label="Museu Vivo, início"><span>museu vivo</span><small>CONCEIÇÃO EVARISTO</small></a>
    <nav className="desktop-nav" aria-label="Navegação principal"><a href="#museu" onClick={()=>museum.current?.goTo(0)} aria-current={view==='museum'?'page':undefined}>O museu</a><button onClick={()=>go(3)}>Acervo</button><a href="#fontes">O projeto e fontes</a><a className="button dark" href="#acolhimento"><HeartHandshake size={17}/> Encontrar acolhimento</a></nav>
-   <div className="header-tools"><button className="icon-button" aria-label="Opções de acessibilidade" aria-expanded={settings} onClick={()=>setSettings(!settings)}><Accessibility size={21}/></button><button className="icon-button mobile-menu" aria-label={menu?'Fechar menu':'Abrir menu'} aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></div>
+   <div className="header-tools"><a className="mobile-support" href="#acolhimento"><HeartHandshake size={17}/> <span>Acolhimento</span></a><button className="icon-button" aria-label="Opções de acessibilidade" aria-expanded={settings} onClick={()=>setSettings(!settings)}><Accessibility size={21}/></button><button className="icon-button mobile-menu" aria-label={menu?'Fechar menu':'Abrir menu'} aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></div>
   </header>
   {settings&&<aside className="access-panel" aria-label="Acessibilidade"><h2>Leia do seu jeito.</h2><label><input type="checkbox" checked={reading} onChange={e=>setReading(e.target.checked)}/> Leitura vertical</label><label><input type="checkbox" checked={reduced} onChange={e=>setReduced(e.target.checked)}/> Reduzir movimentos</label><p>Você também pode navegar pelas salas usando as setas do teclado.</p><button className="text-link" onClick={()=>setSettings(false)}>Concluir</button></aside>}
   {menu&&<nav className="menu-panel" aria-label="Menu móvel"><a href="#museu" onClick={()=>setMenu(false)}>O museu</a>{roomNames.map((n,i)=><button key={n} onClick={()=>go(i)}>{n}</button>)}<a href="#acolhimento" onClick={()=>setMenu(false)}>Encontrar acolhimento</a><a href="#fontes" onClick={()=>setMenu(false)}>O projeto e fontes</a></nav>}
